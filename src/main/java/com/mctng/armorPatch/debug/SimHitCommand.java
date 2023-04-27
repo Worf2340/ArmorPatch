@@ -1,4 +1,4 @@
-package com.mctng.armorPatch;
+package com.mctng.armorPatch.debug;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
