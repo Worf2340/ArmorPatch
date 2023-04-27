@@ -464,7 +464,7 @@ public class EntityDamageByEntityListener implements Listener {
                 List<String> modifiers = getCustomModifiers(armorPiece); // Assume this method returns the list of custom modifiers
 
                 for (String modifier : modifiers) {
-                    System.out.println(armorPiece + ": " + modifier);
+                   // System.out.println(armorPiece + ": " + modifier);
                     switch (modifier) {
                         case "protect1":
                             modifierArmorPoints += 1;
@@ -486,7 +486,7 @@ public class EntityDamageByEntityListener implements Listener {
                     }
                 }
 
-                System.out.println(armorPiece + ": " + modifierArmorPoints);
+                // System.out.println(armorPiece + ": " + modifierArmorPoints);
 
                 totalArmorPoints += (baseArmorPoints + modifierArmorPoints);
             }
