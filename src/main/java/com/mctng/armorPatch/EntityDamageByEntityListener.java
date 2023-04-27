@@ -22,6 +22,11 @@ import java.util.Map;
 
 public class EntityDamageByEntityListener implements Listener {
 
+    ArmorPatch plugin;
+
+    public EntityDamageByEntityListener(ArmorPatch plugin) {
+        this.plugin = plugin;
+    }
     private static final Map<Integer, Double> ARMOR_POINTS_MAP = new HashMap<Integer, Double>() {{
         put(4784, 2.0); // Arnorian Helmet
         put(4785, 6.0); // Arnorian Chestplate
@@ -421,8 +426,8 @@ public class EntityDamageByEntityListener implements Listener {
         // Check if damage is from a projectile
         boolean isProjectile = damager instanceof Projectile;
 
-        player.sendMessage(String.valueOf(isProjectile));
-        player.sendMessage(String.valueOf(event.getCause()));
+//        player.sendMessage(String.valueOf(isProjectile));
+//        player.sendMessage(String.valueOf(event.getCause()));
 
         ItemStack[] armorInventory = player.getInventory().getArmorContents();
         ItemStack weapon = null;
@@ -439,7 +444,9 @@ public class EntityDamageByEntityListener implements Listener {
         double damage = event.getDamage(EntityDamageEvent.DamageModifier.BASE);
         double totalProtection = -1 * getArmorDamageReductionWithModifiers(armorInventory, weapon) * damage;
 
-        player.sendMessage(ChatColor.RED + String.valueOf(event.getFinalDamage()));
+        if (this.plugin.debugList.contains(player)) {
+            player.sendMessage(ChatColor.RED + String.valueOf(event.getFinalDamage()));
+        }
 //        player.sendMessage(ChatColor.BLUE + String.valueOf(event.getOriginalDamage(EntityDamageEvent.DamageModifier.ARMOR)));
 //        player.sendMessage(ChatColor.LIGHT_PURPLE + String.valueOf(totalProtection));
 //        player.sendMessage(ChatColor.GOLD + String.valueOf(event.getOriginalDamage(EntityDamageEvent.DamageModifier.MAGIC)));
@@ -448,7 +455,9 @@ public class EntityDamageByEntityListener implements Listener {
         // Calculate damage reduction using the total protection value
         event.setDamage(EntityDamageEvent.DamageModifier.ARMOR, totalProtection);
 
-       // player.sendMessage(ChatColor.GREEN + String.valueOf(event.getFinalDamage()));
+        if (this.plugin.debugList.contains(player)) {
+            player.sendMessage(ChatColor.GREEN + String.valueOf(event.getFinalDamage()));
+        }
     }
 
     public double getArmorDamageReductionWithModifiers(ItemStack[] armorInventory, ItemStack weapon) {

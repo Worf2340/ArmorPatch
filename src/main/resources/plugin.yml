@@ -3,7 +3,6 @@ main: com.mctng.armorPatch.ArmorPatch
 version: 1.0
 author: Worf2340
 commands:
-  itemtype:
-    usage: none
-  simhit:
-    usage: none
+  armorpatch:
+    usage: /armorpatch debug
+    permission: armorpatch.debug
